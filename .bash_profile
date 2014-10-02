@@ -137,8 +137,8 @@ fi
 ## Push
 function save_dotfiles() {
   source ~/.bash_profile
-  local gitdir="/Users/$USER/Development/derricks-dynamite-dotfiles/.git"
-  local workingdir="/Users/$USER/Development/derricks-dynamite-dotfiles/"
+  local gitdir="~/Development/derricks-dynamite-dotfiles/.git"
+  local workingdir="~/Development/derricks-dynamite-dotfiles/"
   echo "What did you change? "
   read commitMsg
   rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
@@ -149,8 +149,8 @@ function save_dotfiles() {
 
 ## Pull
 function update_dotfiles() {
-  local gitdir="/Users/$USER/Development/derricks-dynamite-dotfiles/.git"
-  local workingdir="/Users/$USER/Development/derricks-dynamite-dotfiles/"
+  local gitdir="~/Development/derricks-dynamite-dotfiles/.git"
+  local workingdir="~/Development/derricks-dynamite-dotfiles/"
   git --git-dir=$gitdir --work-tree=$workingdir pull origin master
   rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
   source ~/.bash_profile && source ~/.bashrc
