@@ -50,13 +50,13 @@ function server() {
 }
 
 ## Export GIT Stuff
-function gitexport(){
+function gitexport() {
   mkdir -p "$1"
   git archive master | tar -x -C "$1"
 }
 
 ## Create Animated Gif
-gifify() {
+function gifify() {
   if [[ -n "$1" ]]; then
     if [[ $2 == '--good' ]]; then
       ffmpeg -i $1 -r 10 -vcodec png out-static-%05d.png
@@ -94,8 +94,7 @@ else
 fi
 
 ## GIT Prompt
-git_prompt ()
-{
+function git_prompt () {
   if ! git rev-parse --git-dir > /dev/null 2>&1 || [[ $PWD == *Volumes* ]]; then
     return 0
   fi
@@ -120,12 +119,30 @@ PS1='\n\[$(tput bold)\]\[$(tput setaf 5)\]\u \[$(tput sgr0)\]\[$(tput setaf 4)\]
 
 
 
-
-
 #################################
 # Extras
 #################################
 
 if [ -f ~/.extras ]; then
   . ~/.extras
-fi  
+fi
+
+
+
+
+#################################
+# Sync
+#################################
+
+## Push
+function syncPush() {
+  echo "What did you change? "
+  read commitMsg
+  echo $commitMsg
+  #rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
+  #cd ~/Development/derricks-dynamite-dotfiles
+  #git add -A && git commit -m $commitMsg
+  #git push origin master
+}
+
+## Pull
