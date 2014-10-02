@@ -136,6 +136,7 @@ fi
 
 ## Push
 function save_dotfiles() {
+  source ~/.bash_profile
   local gitdir="/Users/$USER/Development/derricks-dynamite-dotfiles/.git"
   local workingdir="/Users/$USER/Development/derricks-dynamite-dotfiles/"
   echo "What did you change? "
