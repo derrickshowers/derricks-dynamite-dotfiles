@@ -148,7 +148,8 @@ function save_dotfiles() {
 
 ## Pull
 function update_dotfiles() {
-  cd ~/Development/derricks-dynamite-dotfiles
-  git pull origin master
-  rsync .bash_profile .bashrc ~/
+  local gitdir="/Users/$USER/Development/derricks-dynamite-dotfiles/.git"
+  local workingdir="/Users/$USER/Development/derricks-dynamite-dotfiles/"
+  git --git-dir=$gitdir --work-tree=$workingdir pull origin master
+  rsync ~/Development/derricks-dynamie-dotfiles/.bash_profile ~/Development/derricks-dynamie-dotfiles/.bashrc ~/
 }
