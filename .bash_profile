@@ -139,9 +139,7 @@ function save_dotfiles() {
   echo "What did you change? "
   read commitMsg
   rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
-  cd ~/Development/derricks-dynamite-dotfiles
-  git add -A && git commit -m "$commitMsg"
-  git push origin master
+  cd ~/Development/derricks-dynamite-dotfiles && git add -A && git commit -m "$commitMsg" && git push origin master
 }
 
 ## Pull
