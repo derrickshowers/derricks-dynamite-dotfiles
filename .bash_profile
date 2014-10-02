@@ -138,11 +138,10 @@ fi
 function syncPush() {
   echo "What did you change? "
   read commitMsg
-  echo $commitMsg
-  #rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
-  #cd ~/Development/derricks-dynamite-dotfiles
-  #git add -A && git commit -m $commitMsg
-  #git push origin master
+  rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
+  cd ~/Development/derricks-dynamite-dotfiles
+  git add -A && git commit -m "$commitMsg"
+  git push origin master
 }
 
 ## Pull
