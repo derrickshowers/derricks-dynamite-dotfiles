@@ -135,7 +135,7 @@ fi
 #################################
 
 ## Push
-function syncPush() {
+function save_dotfiles() {
   echo "What did you change? "
   read commitMsg
   rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
