@@ -22,6 +22,7 @@ alias cd..="cd .."
 
 ## Directory Shortcut
 alias dev="cd ~/Development"
+alias home="~/"
 
 
 
