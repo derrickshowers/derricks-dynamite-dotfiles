@@ -1,0 +1,9 @@
+# Derrick's Dynamite (.)Dotfiles
+# Author: Derrick Showers (@derrickshowers)
+# Website: http://derrickshowers.com
+
+# We really don't do anything with this file, it just exists
+# for non login shells
+if [ -f ~/.bash_profile ]; then
+  . ~/.bash_profile
+fi
