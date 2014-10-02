@@ -1,6 +1,0 @@
-0000000000000000000000000000000000000000 b4bde3c1feb11a4fc2f016e29fc1ad746af331f8 Derrick Showers <derrick@derrickshowers.com> 1412228306 -0700	clone: from git@github.com:derrickshowers/derricks-dynamite-dotfiles.git
-b4bde3c1feb11a4fc2f016e29fc1ad746af331f8 afcb561148b442806c63b8b6aea3cbb9c198e541 Derrick Showers <derrick@derrickshowers.com> 1412228501 -0700	commit: Hello
-afcb561148b442806c63b8b6aea3cbb9c198e541 f9a4aa8d362be2a89b4e40867768c01e5a2b29a6 Derrick Showers <derrick@derrickshowers.com> 1412228668 -0700	commit: Updating git commit message
-f9a4aa8d362be2a89b4e40867768c01e5a2b29a6 cffbe6ff24d524a7f2be7fa92d6f0537f568246f Derrick Showers <derrick@derrickshowers.com> 1412228720 -0700	commit: updating function name
-cffbe6ff24d524a7f2be7fa92d6f0537f568246f df9cdb0e17cc9b0ed4f953bda13e946b62987c54 Derrick Showers <derrick@derrickshowers.com> 1412228889 -0700	commit: added function to update
-df9cdb0e17cc9b0ed4f953bda13e946b62987c54 8c7de8524e4f07c5cd6731f1af250374bd2f451c Derrick Showers <derrick@derrickshowers.com> 1412228992 -0700	commit: cd is now all on one line
