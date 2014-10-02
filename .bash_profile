@@ -153,4 +153,5 @@ function update_dotfiles() {
   local workingdir="/Users/$USER/Development/derricks-dynamite-dotfiles/"
   git --git-dir=$gitdir --work-tree=$workingdir pull origin master
   rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
+  source ~/.bash_profile && source ~/.bashrc
 }
