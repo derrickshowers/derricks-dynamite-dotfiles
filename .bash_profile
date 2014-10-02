@@ -145,3 +145,8 @@ function save_dotfiles() {
 }
 
 ## Pull
+function update_dotfiles() {
+  cd ~/Development/derricks-dynamite-dotfiles
+  git pull origin master
+  rsync .bash_profile .bashrc ~/
+}
