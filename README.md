@@ -27,6 +27,25 @@ A few of the included functions have dependencies. You don't need to install, bu
   * gifsicle (can be installed easily with [brew](http://brew.sh/))
 
 
+## VIM Awesomeness - spf13
+
+If you really want to take things to the next level and start to utilize VIM a bit more as your text editor, try out [spf13](http://vim.spf13.com/). Included in this repo are a couple of extra bundles that I've installed:
+
+* [bufexplorer](https://github.com/jlanzarotta/bufexplorer) - allows you to switch back and forth between your buffers with ease
+
+To use, first install spf13
+        
+    curl http://j.mp/spf13-vim3 -L -o - | sh
+
+Then move the .vimrc.bundles.local to your home directory
+        
+    cp .vimrc.bundles.local ~/
+
+Finally, install your custom stuff (or my custom stuff in this case)
+
+    vim +BundleInstall! +BundleClean +q
+
+
 ## Extras
 
 Do you have aliases that are specific to certain machines? For instance, maybe some aliases that you only use on your work machine. Create a new file, call it '.extras', place it in your home directory, and it will automatically be included.
