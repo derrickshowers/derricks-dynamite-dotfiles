@@ -23,7 +23,8 @@ alias cd..="cd .."
 ## Directory Shortcut
 alias dev="cd ~/Development"
 
-
+## Tools
+alias ksdiff="git difftool -y -t Kaleidoscope"
 
 
 #################################
