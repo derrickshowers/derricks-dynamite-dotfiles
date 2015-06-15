@@ -23,9 +23,8 @@ alias cd..="cd .."
 ## Directory Shortcut
 alias dev="cd ~/Development"
 
-## Tools
-alias ksdiff="git difftool -y -t Kaleidoscope"
-
+## GIT shortcuts
+alias pruneLocal="git branch --merged | egrep -v \"^\*|master\" | xargs -n 1 git branch -d"
 
 #################################
 # Helper Functions
@@ -138,8 +137,8 @@ fi
 ## Push
 function save_dotfiles() {
   source ~/.bash_profile
-  local gitdir="~/Development/derricks-dynamite-dotfiles/.git"
-  local workingdir="~/Development/derricks-dynamite-dotfiles/"
+  local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
+  local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   echo "What did you change? "
   read commitMsg
   rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
@@ -150,8 +149,8 @@ function save_dotfiles() {
 
 ## Pull
 function update_dotfiles() {
-  local gitdir="~/Development/derricks-dynamite-dotfiles/.git"
-  local workingdir="~/Development/derricks-dynamite-dotfiles/"
+  local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
+  local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   git --git-dir=$gitdir --work-tree=$workingdir pull origin master
   rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
   source ~/.bash_profile && source ~/.bashrc
