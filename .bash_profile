@@ -141,7 +141,7 @@ function save_dotfiles() {
   local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   echo "What did you change? "
   read commitMsg
-  rsync ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
+  rsync ~/.bash_profile ~/.vimrc.local ~/.vimrc.bundles.local ~/Development/derricks-dynamite-dotfiles
   git --git-dir=$gitdir --work-tree=$workingdir add -A
   git --git-dir=$gitdir --work-tree=$workingdir commit -m "$commitMsg"
   git --git-dir=$gitdir --work-tree=$workingdir push origin master
@@ -152,6 +152,6 @@ function update_dotfiles() {
   local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
   local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   git --git-dir=$gitdir --work-tree=$workingdir pull origin master
-  rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
+  rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.vimrc.local ~/Development/derricks-dynamite-dotfiles/.vimrc.bundles.local ~/
   source ~/.bash_profile && source ~/.bashrc
 }
