@@ -26,6 +26,9 @@ alias dev="cd ~/Development"
 ## GIT shortcuts
 alias pruneLocal="git branch --merged | egrep -v \"^\*|master\" | xargs -n 1 git branch -d"
 
+## NPM
+alias pnpm="npm --always-auth false  --registry http://registry.npmjs.org"
+
 #################################
 # Helper Functions
 #################################
@@ -49,6 +52,12 @@ function server() {
   python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
 }
 
+function server-php() {
+  local port="${1:-9000}"
+  open "http://localhost:${port}/"
+  php -S localhost:${port}
+}
+
 ## Export GIT Stuff
 function gitexport() {
   mkdir -p "$1"
@@ -58,77 +67,23 @@ function gitexport() {
 ## Create Animated Gif
 function gifify() {
   if [[ -n "$1" ]]; then
-    if [[ $2 == '--good' ]]; then
-      ffmpeg -i $1 -r 10 -vcodec png out-static-%05d.png
-      time convert -verbose +dither -layers Optimize -resize 600x600\> out-static*.png  GIF:- | gifsicle --colors 128 --delay=5 --loop --optimize=3 --multifile - > $1.gif
-      rm out-static*.png
+    if [[ $2 == "--small" ]]; then
+      ffmpeg -i $1 -r 3 -filter:v scale=200:-1 -f gif - | gifsicle --optimize=3 --delay=20 > $1.gif
     else
-      ffmpeg -i $1 -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > $1.gif
+      ffmpeg -i $1 -r 3 -f gif - | gifsicle --optimize=3 --delay=20 > $1.gif
     fi
   else
     echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
   fi
 }
 
-
-
-
-
-#################################
-# BASH Prompt Stuff
-#################################
-
-## BASH Coloring
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-  c_reset=`tput sgr0`
-  c_user=`tput setaf 2; tput bold`
-  c_path=`tput setaf 4; tput bold`
-  c_git_clean=`tput setaf 2`
-  c_git_dirty=`tput setaf 1`
-else
-  c_reset=
-  c_user=
-  c_path=
-  c_git_cleanclean=
-  c_git_dirty=
-fi
-
-## GIT Prompt
-function git_prompt () {
-  if ! git rev-parse --git-dir > /dev/null 2>&1 || [[ $PWD == *Volumes* ]]; then
-    return 0
-  fi
-
-  git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-
-  if git diff --quiet 2>/dev/null >&2; then
-    git_color="${c_git_clean}"
-  else
-    git_color=${c_git_dirty}
-  fi
-
-  echo " [$git_color$git_branch${c_reset}]"
-}
-
-## Make BASH Prettier
-PROMPT_COMMAND='if [ ${#PWD} -gt 30 ]; then
-myPWD=${PWD:0:12}...${PWD:${#PWD}-15}; else myPWD=$PWD; fi'
-PS1='\n\[$(tput bold)\]\[$(tput setaf 5)\]\u \[$(tput sgr0)\]\[$(tput setaf 4)\]$myPWD\[$(tput sgr0)\]\[$(tput bold)\]$(git_prompt)\[$(tput sgr0)\]\n$ '
-
-
-
-
-
 #################################
 # Extras
 #################################
 
-if [ -f ~/.extras ]; then
+if [[ -f ~/.extras ]]; then
   . ~/.extras
 fi
-
-
-
 
 #################################
 # Sync
@@ -141,7 +96,7 @@ function save_dotfiles() {
   local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   echo "What did you change? "
   read commitMsg
-  rsync ~/.bash_profile ~/.vimrc.local ~/.vimrc.bundles.local ~/Development/derricks-dynamite-dotfiles
+  rsync -L ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
   git --git-dir=$gitdir --work-tree=$workingdir add -A
   git --git-dir=$gitdir --work-tree=$workingdir commit -m "$commitMsg"
   git --git-dir=$gitdir --work-tree=$workingdir push origin master
@@ -152,6 +107,6 @@ function update_dotfiles() {
   local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
   local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
   git --git-dir=$gitdir --work-tree=$workingdir pull origin master
-  rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.vimrc.local ~/Development/derricks-dynamite-dotfiles/.vimrc.bundles.local ~/
+  rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
   source ~/.bash_profile && source ~/.bashrc
 }
