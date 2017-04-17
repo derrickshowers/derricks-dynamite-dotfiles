@@ -2,35 +2,32 @@
 # Author: Derrick Showers (@derrickshowers)
 # Website: http://derrickshowers.com
 
-
 #################################
-# Settings
+# DEFAULTS
 #################################
 
 ## Exports
 export EDITOR="vim"
 
-
-
 #################################
-# Aliases
+# ALIASES
 #################################
 
-## Navigation Stuff
+## Command Line Navigation
 alias ll="ls -l"
 alias cd..="cd .."
 
 ## Directory Shortcut
 alias dev="cd ~/Development"
 
-## GIT shortcuts
+## GIT Shortcuts
 alias pruneLocal="git branch --merged | egrep -v \"^\*|master\" | xargs -n 1 git branch -d"
 
 ## NPM
-alias pnpm="npm --always-auth false  --registry http://registry.npmjs.org"
+alias pnpm="npm --always-auth false --registry http://registry.npmjs.org"
 
 #################################
-# Helper Functions
+# HELPERS
 #################################
 
 ## Find Shorthand
@@ -64,7 +61,7 @@ function gitexport() {
   git archive master | tar -x -C "$1"
 }
 
-## Create Animated Gif
+## Create Animated GIF
 function gifify() {
   if [[ -n "$1" ]]; then
     if [[ $2 == "--small" ]]; then
@@ -78,35 +75,14 @@ function gifify() {
 }
 
 #################################
-# Extras
+# EXTRAS
+#
+# Sometimes we want to have different settings on each machine. For instance,
+# there could be settings only necessary on a work machine. Include a .extras
+# file and put it in your home directory. Throw anything in there that is
+# machine specific
 #################################
 
 if [[ -f ~/.extras ]]; then
   . ~/.extras
 fi
-
-#################################
-# Sync
-#################################
-
-## Push
-function save_dotfiles() {
-  source ~/.bash_profile
-  local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
-  local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
-  echo "What did you change? "
-  read commitMsg
-  rsync -L ~/.bash_profile ~/Development/derricks-dynamite-dotfiles
-  git --git-dir=$gitdir --work-tree=$workingdir add -A
-  git --git-dir=$gitdir --work-tree=$workingdir commit -m "$commitMsg"
-  git --git-dir=$gitdir --work-tree=$workingdir push origin master
-}
-
-## Pull
-function update_dotfiles() {
-  local gitdir="$HOME/Development/derricks-dynamite-dotfiles/.git/"
-  local workingdir="$HOME/Development/derricks-dynamite-dotfiles/"
-  git --git-dir=$gitdir --work-tree=$workingdir pull origin master
-  rsync ~/Development/derricks-dynamite-dotfiles/.bash_profile ~/Development/derricks-dynamite-dotfiles/.bashrc ~/
-  source ~/.bash_profile && source ~/.bashrc
-}

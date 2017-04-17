@@ -1,0 +1,84 @@
+"""""""""""""""""""""""
+" DERRICK'S VIM SETUP "
+"""""""""""""""""""""""
+
+" PLUGINS
+" Default values per https://github.com/VundleVim/Vundle.vim
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let vundle manage itself
+Plugin 'VundleVim/Vundle.vim'
+
+" PLUGIN LIST GOES HERE
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'jimmyhchan/dustjs.vim'
+Plugin 'Shutnik/jshint2.vim'
+Plugin 'bufexplorer.zip'
+Plugin 'scrooloose/nerdtree'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'nathanaelkane/vim-indent-guides'
+" PLUGIN LIST ENDS HERE
+
+call vundle#end()
+
+" SYNTAX HIGHLIGHTING
+syntax on
+filetype plugin indent on
+
+" REMAP LEADER KEY
+let mapleader=" "
+
+" MAP CTRL SHORTCUTS
+map <C-I> mzgg=G`z
+
+" MISC SETTINGS
+set hidden
+set backspace=indent,eol,start
+set autoindent
+set encoding=utf-8
+set history=1000                    "default is only 20
+set laststatus=2                    "always show status bar
+set showmode                        "shows the current mode (e.g. INSERT)
+set showcmd
+set ruler                           "show the cursor position bottom-right
+set scrolloff=3                     "scroll before the cursor reaches the bottom/top set number
+
+" MAKE TAB COMPLETE COMMAND USEFUL
+set wildmenu
+set wildmode=list:longest
+
+" DEFAULT CODE FORMATTING
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" CTRL-P
+let g:ctrlp_working_path_mode = 'r' " Use nearest .git as cwd
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\v[\/](\.(git|hg|svn)|node_modules|bower_components|tmp|target|dist)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+let g:ctrlp_root_markers = ['.ctrlp_stop']
+
+" INDENT GUIDES CONFIG
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=237
+
+" NERDTREE CONFIG
+cnoreabbrev nt NERDTreeToggle
+
+" COLORS
+colorscheme distinguished
+
+" SCROLLING
+set mouse=a
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
